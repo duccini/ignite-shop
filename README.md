@@ -7,7 +7,9 @@
 ## Key Concepts Learned
 
 
-- [in progress ...]
+- File System Routing
+- Work with _document component
+- Stitches CSS-in-JS
 
 
 ## Installation
@@ -18,6 +20,6 @@ Install the dependencies and devDependencies and start the server.
 
 ```sh
 cd ignite-shop
-npm i
-npm run dev
+yarn
+yarn dev
 ```
