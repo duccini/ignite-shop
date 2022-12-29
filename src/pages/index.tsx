@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import { styled } from '../styles'
 
 const Button = styled('button', {
-  backgroundColor: '$rocketseat',
+  backgroundColor: '$green300',
   borderRadius: '4px',
   border: 0,
   padding: '1rem 2rem',
