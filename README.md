@@ -6,11 +6,12 @@
 
 ## Key Concepts Learned
 
-
-- File System Routing
-- Work with _document component
-- Stitches CSS-in-JS
-
+- Next.js: _document, _app, and Image components
+- Next.js: File System Routing
+- Next.js: SSR
+- Stripe API
+- Stitches(CSS-in-JS): components, theme, and SSR
+- React Carrousel with Keen-slider
 
 ## Installation
 

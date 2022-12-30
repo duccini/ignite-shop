@@ -1,28 +1,72 @@
-import { NextPage } from 'next'
-import { styled } from '../styles'
+import { useKeenSlider } from 'keen-slider/react'
+import 'keen-slider/keen-slider.min.css'
 
-const Button = styled('button', {
-  backgroundColor: '$green300',
-  borderRadius: '4px',
-  border: 0,
-  padding: '1rem 2rem',
+import Image from 'next/image'
+import { GetServerSideProps } from 'next'
+import { stripe } from '../lib/stripe'
+import Stripe from 'stripe'
 
-  span: {
-    fontWeight: 'bold',
-  },
+import { HomeContainer, Product } from '../styles/pages/home'
 
-  '&:hover': {
-    filter: 'brightness(0.8)',
-  },
-})
+interface HomeProps {
+  products: {
+    id: string
+    name: string
+    imageUrl: string
+    price: number
+  }[]
+}
 
-const Home: NextPage = () => {
+export default function Home({ products }: HomeProps) {
+  const [sliderRef] = useKeenSlider({
+    slides: {
+      perView: 2.5,
+      spacing: 48,
+    },
+  })
+
   return (
-    <Button>
-      <span>Teste</span>
-      Enviar
-    </Button>
+    <HomeContainer ref={sliderRef} className="keen-slider">
+      {products.map((product) => {
+        return (
+          <Product key={product.id} className="keen-slider__slide">
+            <Image
+              src={product.imageUrl}
+              width={520}
+              height={430}
+              alt="camiseta1"
+            />
+
+            <footer>
+              <strong>{product.name}</strong>
+              <span>{product.price}</span>
+            </footer>
+          </Product>
+        )
+      })}
+    </HomeContainer>
   )
 }
 
-export default Home
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await stripe.products.list({
+    expand: ['data.default_price'],
+  })
+
+  const products = response.data.map((product) => {
+    const price = product.default_price as Stripe.Price
+
+    return {
+      id: product.id,
+      name: product.name,
+      imageUrl: product.images[0],
+      price: price.unit_amount! / 100,
+    }
+  })
+
+  return {
+    props: {
+      products,
+    },
+  }
+}
