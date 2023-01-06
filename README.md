@@ -8,7 +8,9 @@
 
 - Next.js: _document, _app, and Image components
 - Next.js: File System Routing
-- Next.js: SSR
+- Next.js: SSR, SSG, and ISR
+- Next.js: prefetch of links
+- Next.js: API routes
 - Stripe API
 - Stitches(CSS-in-JS): components, theme, and SSR
 - React Carrousel with Keen-slider
