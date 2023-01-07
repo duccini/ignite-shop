@@ -11,6 +11,7 @@
 - Next.js: SSR, SSG, and ISR
 - Next.js: prefetch of links
 - Next.js: API routes
+- Next.js: SEO with Head component
 - Stripe API
 - Stitches(CSS-in-JS): components, theme, and SSR
 - React Carrousel with Keen-slider

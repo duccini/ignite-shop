@@ -10,6 +10,7 @@ import { HomeContainer, Product } from '../styles/pages/home'
 import Link from 'next/link'
 import { ProductModel } from '../models/product.model'
 import { priceFormatter } from '../utils/formatter'
+import Head from 'next/head'
 
 interface HomeProps {
   products: ProductModel[]
@@ -24,31 +25,37 @@ export default function Home({ products }: HomeProps) {
   })
 
   return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
-      {products.map((product) => {
-        return (
-          <Link
-            href={`/product/${product.id}`}
-            key={product.id}
-            prefetch={false}
-          >
-            <Product className="keen-slider__slide">
-              <Image
-                src={product.imageUrl}
-                width={520}
-                height={430}
-                alt={product.name}
-              />
+    <>
+      <Head>
+        <title>Home | Ignite Shop</title>
+      </Head>
 
-              <footer>
-                <strong>{product.name}</strong>
-                <span>{product.price}</span>
-              </footer>
-            </Product>
-          </Link>
-        )
-      })}
-    </HomeContainer>
+      <HomeContainer ref={sliderRef} className="keen-slider">
+        {products.map((product) => {
+          return (
+            <Link
+              href={`/product/${product.id}`}
+              key={product.id}
+              prefetch={false}
+            >
+              <Product className="keen-slider__slide">
+                <Image
+                  src={product.imageUrl}
+                  width={520}
+                  height={430}
+                  alt={product.name}
+                />
+
+                <footer>
+                  <strong>{product.name}</strong>
+                  <span>{product.price}</span>
+                </footer>
+              </Product>
+            </Link>
+          )
+        })}
+      </HomeContainer>
+    </>
   )
 }
 
